@@ -1,8 +1,6 @@
 #include "mainClasses.h"
 
-//#include <iostream>
-
-
+// DIVIDE INTO TWO CLASSES
 
 //Fill all rows
 Game::Game() {
@@ -54,42 +52,87 @@ void Game::showBoard() {
         << gameBoard[3][2] << "," << "" << gameBoard[3][3] << "]" << std::endl;
 }
 
-void Game::CheckBoard() {
+void Game::checkWinner(int xCount, int oCount, bool &xWin, bool &oWin) {
+    if (xCount == 4) {
+        xWin = true;
+    }
+    else if (oCount == 4) {
+        oWin = true;
+    }
+}
 
-    //loop Vertically 
+void Game::checkBoard(bool &xWin, bool &oWin) {
+    //bool xIsWinner = false;
+    //bool oIsWinner = false;
+    
+    // Check Diagonally
     for (int i = 0; i < 4; i++) {
-        int x_HorizontalCount = 0;
-        int o_HorizontalCount = 0;
+        int x_Count = 0;
+        int o_Count = 0;
+
+        if (gameBoard[i][i] == 'x') {
+            x_Count += 1;
+        }
+
+        if (gameBoard[i][i] == 'o') {
+            o_Count += 1;
+        }
+
+        checkWinner(x_Count, o_Count, xWin, oWin);
+
+    }
+
+    // Exit if either player has won
+    if (oWin || xWin) {
+        return;
+    }
+
+    // Check Vertically 
+    for (int i = 0; i < 4; i++) {
+        int x_Count = 0;
+        int o_Count = 0;
 
         for (int j = 0; j < 4; j++) {
             if (gameBoard[j][i] == 'x') {
-                x_HorizontalCount += 1;
+                x_Count += 1;
             }
 
             if (gameBoard[j][i] == 'o') {
-                o_HorizontalCount += 1;
+                o_Count += 1;
             }
         }
+
+        checkWinner(x_Count, o_Count, xWin, oWin);
     }
 
-    //loop horizontaly
+    // Exit if either player has won
+    if (oWin || xWin) {
+        return;
+    }
+
+    // Check horizontaly
     for (int i = 0; i < 4; i++) {
-        int x_VerticalCount = 0;
-        int o_VerticalCount = 0;
+        int x_Count = 0;
+        int o_Count = 0;
 
          
         for (int j = 0; j < 4; j++) {
 
             if (gameBoard[i][j] == 'x') {
-                x_VerticalCount += 1;
+                x_Count += 1;
             }
 
             if (gameBoard[i][j] == 'o') {
-                o_VerticalCount += 1;
+                o_Count += 1;
             }
         }
 
+        checkWinner(x_Count, o_Count, xWin, oWin);
+    }
 
+    // Exit if either player has won
+    if (oWin || xWin) {
+        return;
     }
 
 }
@@ -108,9 +151,9 @@ void User::makeMove(Game& gameBoard, int row, int column) {
 }
 
 
-
-// [0, 1, 2, 3]
-// [0, 1, 2, 3]
-// [0, 1, 2, 3]
-// [0, 1, 2, 3]
+// FOR PERSONAL REFERENCE
+// [x, -, o, -]
+// [-, x, o, o]
+// [-, o, x, -]
+// [-, -, -, x]
 
