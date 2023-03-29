@@ -23,6 +23,7 @@ class User {
 public:
     User(char mark);
     void setName(std::string uName);
+    std::string getName();
     void makeMove(Game& gameBoard, int row, int column);
 };
 
