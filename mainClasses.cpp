@@ -146,6 +146,10 @@ void User::setName(std::string uName) {
     name = uName;
 }
 
+std::string User::getName() {
+    return name;
+}
+
 void User::makeMove(Game& gameBoard, int row, int column) {
     gameBoard.fillBoard(row, column, marker);
 }
