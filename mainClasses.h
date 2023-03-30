@@ -7,7 +7,7 @@
 class Game {
     char gameBoard[4][4];
 public:
-    Game(); // Initialise Points
+    Game();
     void showBoard();
     void fillBoard(int row, int column, char mark);
     void checkWinner(int xCount, int oCount, bool &xWin, bool &oWin);
